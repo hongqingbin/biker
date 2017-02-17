@@ -1,0 +1,14 @@
+Manifest-Version: 1.0
+Bundle-ManifestVersion: 2
+Bundle-Name: User
+Bundle-SymbolicName: com.unclesam.biker.user
+Bundle-Version: 1.0.0
+Bundle-Vendor: UNCLESAM
+Bundle-RequiredExecutionEnvironment: JavaSE-1.8
+Export-Package: com.unclesam.biker.user.api,
+ com.unclesam.biker.user.pojo
+Import-Package: com.unclesam.biker.app.registry,
+ javax.servlet;version="3.1.0",
+ javax.servlet.http;version="3.1.0",
+ org.osgi.framework
+Bundle-Activator: com.unclesam.biker.user.internal.api.UserActivator

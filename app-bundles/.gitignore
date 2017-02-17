@@ -1,0 +1,17 @@
+bin
+
+.settings
+
+gen
+
+tmp/
+
+*.class
+
+.svn
+
+.DS_Store
+
+xcuserdata
+
+.DS_Store
