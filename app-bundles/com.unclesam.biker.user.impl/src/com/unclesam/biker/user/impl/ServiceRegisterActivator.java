@@ -25,8 +25,8 @@ public class ServiceRegisterActivator implements BundleActivator {
 	static final boolean SSL = System.getProperty("ssl") != null;
 	static final int PORT = Integer.parseInt(System.getProperty("port", SSL ? "8443" : "8080"));
 
-	private EventLoopGroup bossGroup;
-	private EventLoopGroup workerGroup;
+	private EventLoopGroup parentGroup;
+	private EventLoopGroup childGroup;
 	private Channel channel;
 
 	public void start(BundleContext context) throws Exception {
@@ -37,10 +37,10 @@ public class ServiceRegisterActivator implements BundleActivator {
 		} else {
 			sslCtx = null;
 		}
-		bossGroup = new NioEventLoopGroup(1);
-		workerGroup = new NioEventLoopGroup();
+		parentGroup = new NioEventLoopGroup(1);
+		childGroup = new NioEventLoopGroup();
 		ServerBootstrap b = new ServerBootstrap();
-		b.group(bossGroup, workerGroup).channel(NioServerSocketChannel.class)
+		b.group(parentGroup, childGroup).channel(NioServerSocketChannel.class)
 				.handler(new LoggingHandler(LogLevel.INFO)).childHandler(new HttpSnoopServerInitializer(sslCtx));
 
 		channel = b.bind(PORT).sync().channel();
@@ -49,11 +49,24 @@ public class ServiceRegisterActivator implements BundleActivator {
 	}
 
 	public void stop(BundleContext context) throws Exception {
-		channel.close();
-		workerGroup.shutdownGracefully();
-		bossGroup.shutdownGracefully();
-		workerGroup = null;
-		bossGroup = null;
+		if(channel != null) {
+			if(channel.isOpen()) {
+				channel.close();
+			}
+			channel = null;
+		}
+		if(childGroup != null) {
+			if(!childGroup.isShutdown()) {
+				childGroup.shutdownGracefully();
+			}
+			childGroup = null;
+		}
+		if(parentGroup != null) {
+			if(!parentGroup.isShutdown()) {
+				parentGroup.shutdownGracefully();
+			}
+			parentGroup = null;
+		}
 	}
 
 }
