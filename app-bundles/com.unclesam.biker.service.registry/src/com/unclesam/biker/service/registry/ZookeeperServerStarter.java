@@ -19,6 +19,7 @@ public class ZookeeperServerStarter extends ZooKeeperServerMain implements Bundl
 		ServerConfig config = new ServerConfig();
 		config.parse(new String[] { "6789", dir.getAbsolutePath() });
 		runFromConfig(config);
+		System.out.println("ZookeeperServer start.");
 	}
 
 	public void stop(BundleContext bundleContext) throws Exception {
