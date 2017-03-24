@@ -8,7 +8,6 @@ import java.rmi.RemoteException;
 import java.rmi.server.UnicastRemoteObject;
 
 /**
- * 用户实体
  * @author JoinBean
  *
  */
@@ -32,7 +31,6 @@ public class User extends UnicastRemoteObject implements Serializable, Cloneable
 	
 	
 	/**
-	 * 唯一标识
 	 * @return
 	 */
 	public String getRecid() {
@@ -44,7 +42,6 @@ public class User extends UnicastRemoteObject implements Serializable, Cloneable
 	}
 
 	/**
-	 * 姓名
 	 * @return
 	 */
 	public String getName() {
@@ -56,7 +53,6 @@ public class User extends UnicastRemoteObject implements Serializable, Cloneable
 	}
 
 	/**
-	 * 年龄
 	 * @return
 	 */
 	public int getAge() {
@@ -68,7 +64,6 @@ public class User extends UnicastRemoteObject implements Serializable, Cloneable
 	}
 
 	/**
-	 * 性别：0女，1男，2其他
 	 * @return
 	 */
 	public int getSex() {
@@ -80,7 +75,6 @@ public class User extends UnicastRemoteObject implements Serializable, Cloneable
 	}
 
 	/**
-	 * 职业
 	 * @return
 	 */
 	public String getProfession() {
@@ -92,7 +86,6 @@ public class User extends UnicastRemoteObject implements Serializable, Cloneable
 	}
 
 	/**
-	 * 手机号
 	 * @return
 	 */
 	public String getTelephone() {
@@ -104,7 +97,6 @@ public class User extends UnicastRemoteObject implements Serializable, Cloneable
 	}
 
 	/**
-	 * 微信号
 	 * @return
 	 */
 	public String getWxAccount() {
@@ -116,7 +108,6 @@ public class User extends UnicastRemoteObject implements Serializable, Cloneable
 	}
 
 	/**
-	 * QQ号
 	 * @return
 	 */
 	public String getQqAccount() {
@@ -128,7 +119,6 @@ public class User extends UnicastRemoteObject implements Serializable, Cloneable
 	}
 
 	/**
-	 * 邮箱地址
 	 * @return
 	 */
 	public String getEmail() {
