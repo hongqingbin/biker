@@ -1,9 +1,5 @@
 package com.unclesam.biker.service.registry;
 
-import java.io.File;
-
-import org.apache.zookeeper.server.ServerConfig;
-import org.apache.zookeeper.server.ZooKeeperServerMain;
 import org.osgi.framework.BundleActivator;
 import org.osgi.framework.BundleContext;
 
@@ -12,18 +8,19 @@ import org.osgi.framework.BundleContext;
  * @author unclesam
  *
  */
-public class ZookeeperServerStarter extends ZooKeeperServerMain implements BundleActivator {
+public class ZookeeperServerStarter implements BundleActivator {
+	
+	private ServiceRegistryMonitor serviceMonitor;
 	
 	public void start(BundleContext bundleContext) throws Exception {
-		File dir = bundleContext.getDataFile("zookeeper");
-		ServerConfig config = new ServerConfig();
-		config.parse(new String[] { "6789", dir.getAbsolutePath() });
-		runFromConfig(config);
+		this.serviceMonitor = new ServiceRegistryMonitor();
+		this.serviceMonitor.start(bundleContext);
 		System.out.println("ZookeeperServer start.");
 	}
 
 	public void stop(BundleContext bundleContext) throws Exception {
-		shutdown();
+		this.serviceMonitor.stop(bundleContext);
+		this.serviceMonitor = null;
 		System.out.println("ZookeeperServer stop.");
 	}
 
